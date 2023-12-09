@@ -1,0 +1,147 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.box1{
+    width:100%;
+    height: 100vh;
+    background-image: linear-gradient(rgba(0,0,0,0.63),rgba(0,0,0,0.65)),url(148.jpg);
+    background-size: cover;
+    background-position: center;
+}
+.navbar{
+    width: 82%;
+    margin: auto;
+    padding: 50px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.logo{
+    cursor: pointer;
+}
+.navbar ul li{
+    list-style: none;
+    display: inline-block;
+    margin: 0 30px;
+    margin-top: 20px;
+    color: white;
+    font-size: 26px;
+    position: relative;
+}
+a{
+    position: relative;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    font-size: 26px;
+    letter-spacing: 0.5px;
+}
+a:after{
+    content: "";
+    position: absolute;
+    background-color: white;
+    height: 3px;
+    left: 0;
+    bottom: -10px;
+}
+a:hover:after{
+width: 100%;
+}
+.text{
+    width: 100%;
+    position: absolute;
+    top: 54%;
+    transform: translateY(-50%);
+    text-align: center;
+    
+}
+.text h1{
+    font-size: 56px;
+    margin-top: 80px;
+    color:white
+}
+.text h3{
+    font-size: 32px;
+    font-family:'Times New Roman', Times, serif;
+    padding-top: 22px;
+    color: white
+}
+.text p{
+    margin: 20px auto;
+    font-weight: 100;
+    line-height: 25px;
+    font-size: 20px;
+    color: black;
+}
+.span3{
+    color: red;
+}
+.span1{
+    color:yellow;
+}
+.span2{
+    color: violet;
+}
+.navbar2{
+    display:flex;
+    width: 95%;
+    height: 150px;
+    margin:30px 40px 10px 40px;
+    box-shadow: 0 5px 9px rgba(0, 0, 0, 0.1);
+}
+.homenav1{
+    width:55%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: color 0.3s ease;
+}
+.homenav1 ul li{
+    list-style: none;
+    display: inline-block;
+    color: black;
+    font-size: 50px;
+    position: relative;
+    margin-right: 50px;
+    padding-left: 40px;
+    transition: color 0.3s ease;
+}
+.homenav1 a{
+    position: relative;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    color: black;
+    font-size: 35px;
+    letter-spacing: 0.4px;
+}
+.homenav2{
+    width: 45%;
+    display: flex;
+    color:white;
+    justify-content: center;
+    text-align: center;
+}
+.homenav2 .quote{
+    background-color:#484872;
+    margin: 20px 0px 10px 0px;
+    width: 100%;
+    object-fit: cover;
+}
+#qp1{
+    margin-top: 10px;
+    font-size: 37px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.footer1{
+    width: 100%;
+    padding:20px 0 20px 0;
+    background-color: #484872;
+    text-align: center;
+    position: relative;
+    margin-top: 50px;
+  }
+.footer1 p{
+      color:whitesmoke;
+      margin:20px auto;
+}
