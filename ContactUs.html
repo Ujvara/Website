@@ -214,8 +214,8 @@
     let password1=document.getElementById('password1').value;
     }
     let email1Regex=/^[a-zA-z._-]+@[a-zA-Z]+\.[a-z]{2,3}$/
-    if(!emailRegex.test(email1)){
-        alert('Please enter  valid email');
+    if(!email1Regex.test(email1)){
+        alert('Please enter a valid email');
         return false;
     }
     let password1Regex=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/
