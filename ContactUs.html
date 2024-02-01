@@ -18,6 +18,7 @@
 .container2 .card2{
     position: relative;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
     width: 320px;
@@ -96,6 +97,63 @@
     color: black;
     margin-top: 30px;
     font-size: 25px;
+}
+@media only screen and (max-width: 767px) {
+    .container2 {
+        padding: 50px 20px;
+        justify-content: center;
+        align-items: center;
+        display: inline-block;
+        flex-wrap: wrap;
+    }
+    .container2 .card2 {
+        width: 90%;
+        height: auto;
+        margin-bottom: 20px;
+    }
+    .container2 .card2:hover {
+        height: auto;
+    }
+    .container2 .card2 .img2 {
+        width: 80%; 
+        margin-top: 10px;
+    }
+    .container2 .card2:hover .img2 {
+        top: 0;
+        transform: scale(1);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+    .container2 .card2 .content {
+        top: auto;
+        height: auto;
+    }
+    .container2 .card2:hover .content {
+        top: auto;
+        height: auto;
+    }
+    .container2 .card2 .content h2 {
+        font-size: 1.1rem;
+    }
+    .container2 .card2 .content p {
+        font-size: 16px;
+    }
+    .forma {
+        flex-direction: column;
+        margin-top: 80px;
+        margin-left: 20px;
+    }
+    .text2 {
+        width: 100%;
+        height: auto;
+        margin-top: 10%;
+    }
+    .text2 h1 {
+        font-size: 24px; 
+    }
+    .text2 p {
+        font-size: 18px;
+        margin-top: 20px;
+    }
 }
 
 </style>
