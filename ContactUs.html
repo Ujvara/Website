@@ -12,7 +12,6 @@
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    margin:40px;
     padding: 100px 50px;
     justify-content: space-around;
 }
@@ -74,6 +73,30 @@
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     overflow: hidden;
 }
+.forma {
+    min-height: 100vh;
+    width: 90%;
+    margin-top: 180px;
+    margin-left: 100px;
+    display: flex;
+}
+.text2 {
+    width: 70%;
+    height: 60%;
+    margin-top: 20%;
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    padding: 50px;
+}
+.text2 h1 {
+    color:black;
+}
+.text2 p{
+    color: black;
+    margin-top: 30px;
+    font-size: 25px;
+}
 
 </style>
     </head>
@@ -83,6 +106,7 @@
                 <ul >
                     <li><a class="n" href="website.html"><b>Main</b></a></li>
                     <li><a class="n" href="home.html"><b>Home</b></a></li>
+                    <li><a class="n" href="Workspace.html"><b>Workspace</b></a></li>
                     <li><a class="n" href="AboutUs.html"><b>About Us</b></a></li>
                 </ul>
             </div>
@@ -119,6 +143,7 @@
             <dd>AVAILABILITY</dd>
             </div>
         </div>
+<div class="forma">
 <div class="register">
     <div class="form">
                 <input type="checkbox" id="check">
@@ -128,7 +153,7 @@
                   <input type="email" name="email" placeholder="Enter your Email" id="email1" required="">
                   <input type="password" name="pass" placeholder="Enter your Password" id="password1" required="">
                   <a  href="#">Forgot password</a>
-                  <button class="btn" onclick="validationForm1">LOG IN</button>
+                  <button class="btn" onclick="validationForm1()">LOG IN</button>
                 </form>
             <div class="signup">
                 <span class="signup">Don't have an account?
@@ -139,11 +164,13 @@
         <div class="registerform">
             <header>SIGN UP</header>
             <form action="#">
-            <input type="text" name="txt" placeholder="Username" id="username" required="">
+              <input type="text" name="txt" placeholder="Name" id="name" required="">
+              <input type="text" name="txt" placeholder="Surname" id="surname" required="">
+              <input type="text" name="txt" placeholder="Username" id="username" required="">
               <input type="email" name="email" placeholder="Enter your Email" id="email" required="">
               <input type="password" name="pass" placeholder="Create a Password" id="password" required="">
               <input type="password" name="pass" placeholder="Confirm your Password" id="confirmpassword" required="">
-              <button class="btn" onclick="validationForm">SIGN UP</button>
+              <button class="btn" onclick="validationForm()">SIGN UP</button>
             </form>
             <div class="signup">
             <span class="signup">Already have an account?
@@ -152,6 +179,13 @@
             </div>
         </div> 
     </div>
+</div>
+<div class="text2">
+    <h2>Unlock a World of Possibilities!</h2>
+    <p>Signing up for our page opens the door to a host of exciting opportunities and benefits. 
+        Join a vibrant community of like-minded individuals who share your interests and passions</p>
+
+</div>
 </div>
 <div class="container2">
     <div class="card2" style="color:#009668;">
@@ -183,10 +217,22 @@
 </body>
     <script>
         function validationForm(){
+                let name=document.getElementById('name').value;
+                let surname=document.getElementById('surname').value;
                 let username=document.getElementById('username').value;
                 let email=document.getElementById('email').value;
                 let password=document.getElementById('password').value;
                 let password1=document.getElementById('confirmpassword').value;
+            }
+            let nameRegex=/^[A-Za-z]+$/;
+            if(!nameRegex.test(name)){
+                alert('Please fill a valid name');
+                return false;
+            }
+            let surnameRegex=/^[A-Za-z]+$/;
+            if(!surnameRegex.test(name)){
+                alert('Please fill a valid surname');
+                return false;
             }
             let usernameRegex=/^[a-zA-Z0-9_]{8,15}$/
             if(!usernameRegex.test(username)){
