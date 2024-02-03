@@ -1,4 +1,130 @@
+<?php
+session_start();
 
+if (isset($_POST['loginbtn'])) {
+    if (empty($_POST['email']) || empty($_POST['pass'])) {
+        // Handle empty fields if needed
+        echo "Please enter both email and password.";
+    } else {
+        $email = $_POST['email'];
+        $password = $_POST['pass'];
+
+        include_once 'users.php';
+
+        foreach ($users as $user) {
+            if ($user['email'] == $email && password_verify($password, $user['password'])) {
+                $_SESSION['email'] = $email;
+                $_SESSION['role'] = $user['role'];
+                $_SESSION['loginTime'] = date("H:i:s");
+                header("location: website.php"); // Corrected the redirection path
+                exit();
+            }
+        }
+        echo "Incorrect Email or Password!";
+    }
+}
+?>
+<?php
+
+if (isset($_POST['signupbtn'])) {
+    if (empty($_POST['name']) || empty($_POST['surname']) || empty($_POST['username']) ||
+        empty($_POST['email']) || empty($_POST['password']) || empty($_POST['confirmpassword'])) {
+        echo "Fill all fields!";
+    } else {
+        $name = $_POST['name'];
+        $surname = $_POST['surname'];
+        $username = $_POST['username'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $confirmpassword = $_POST['confirmpassword'];
+        $id = $username . uniqid();
+
+        $user = new User($id, $name, $surname, $username, $email, $password, $confirmpassword);
+        $userRepository = new UserRepository();
+
+        $userRepository->insertUser($user);
+    }
+}
+?>
+<?php
+class User {
+    private $id;
+    private $name;
+    private $surname;
+    private $username;
+    private $email;
+    private $password;
+    private $confirmpassword;
+
+    function __construct($id, $name, $surname, $username, $email, $password, $confirmpassword) {
+        $this->id = $id;
+        $this->name = $name;
+        $this->surname = $surname;
+        $this->username = $username;
+        $this->email = $email;
+        $this->password = $password;
+        $this->confirmpassword = $confirmpassword;
+    }
+
+    function getId() {
+        return $this->id;
+    }
+
+    function getName() {
+        return $this->name;
+    }
+
+    function getSurname() {
+        return $this->surname;
+    }
+
+    function getUsername() {
+        return $this->username;
+    }
+
+    function getEmail() {
+        return $this->email;
+    }
+
+    function getPassword() {
+        return $this->password;
+    }
+
+    function getConfirmPassword() {
+        return $this->confirmpassword;
+    }
+}
+?>
+<?php
+  $user1 = [
+    "name"=>"Ujvara",
+    "surname"=>"Kuleta",
+    "username"=>"ujvarak",
+    "email"=>"uk@ubt-uni.net",
+    "password" => "Ujvara.123",
+    "confirmpassword" => "Ujvara.123",
+    "role"=>"admin"
+  ];
+  $user2 = [
+    "name"=>"Lend",
+    "surname"=>"Haliti",
+    "username"=>"lendh",
+    "email"=>"lh@ubt-uni.net",
+    "password" => "Lend.123",
+    "confirmpassword" => "Lend.123",
+    "role"=>"user"
+  ];
+  $user3 = [
+    "name"=>"Buna",
+    "surname"=>"Berisha",
+    "username"=>"bunab",
+    "email"=>"bb@ubt-uni.net",
+    "password" => "Buna.123",
+    "confirmpassword" => "Buna.123",
+    "role"=>"user"
+  ];
+  $users = [$user1, $user2, $user3];
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -164,9 +290,9 @@
             <div class="homenav1">
                 <ul >
                     <li><a class="n" href="website.html"><b>Main</b></a></li>
-                    <li><a class="n" href="home.html"><b>Home</b></a></li>
-                    <li><a class="n" href="Workspace.html"><b>Workspace</b></a></li>
-                    <li><a class="n" href="AboutUs.html"><b>About Us</b></a></li>
+                    <li><a class="n" href="home.php"><b>Home</b></a></li>
+                    <li><a class="n" href="Workspace.php"><b>Workspace</b></a></li>
+                    <li><a class="n" href="AboutUs.php"><b>About Us</b></a></li>
                 </ul>
             </div>
             <div class="homenav2">
@@ -212,7 +338,7 @@
                   <input type="email" name="email" placeholder="Enter your Email" id="email1" required="">
                   <input type="password" name="pass" placeholder="Enter your Password" id="password1" required="">
                   <a  href="#">Forgot password</a>
-                  <button class="btn" onclick="validationForm1()">LOG IN</button>
+                  <button class="btn" name="loginbtn" onclick="validationForm1()">LOG IN</button>
                 </form>
             <div class="signup">
                 <span class="signup">Don't have an account?
@@ -221,23 +347,24 @@
             </div> 
         </div>
         <div class="registerform">
-            <header>SIGN UP</header>
-            <form action="#">
-              <input type="text" name="txt" placeholder="Name" id="name" required="">
-              <input type="text" name="txt" placeholder="Surname" id="surname" required="">
-              <input type="text" name="txt" placeholder="Username" id="username" required="">
-              <input type="email" name="email" placeholder="Enter your Email" id="email" required="">
-              <input type="password" name="pass" placeholder="Create a Password" id="password" required="">
-              <input type="password" name="pass" placeholder="Confirm your Password" id="confirmpassword" required="">
-              <button class="btn" onclick="validationForm()">SIGN UP</button>
-            </form>
-            <div class="signup">
-            <span class="signup">Already have an account?
-                <label for="check">LogIn</label>
-            </span>
-            </div>
-        </div> 
+    <header>SIGN UP</header>
+    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+        <input type="text" name="name" placeholder="Name" id="name" required="">
+        <input type="text" name="surname" placeholder="Surname" id="surname" required="">
+        <input type="text" name="username" placeholder="Username" id="username" required="">
+        <input type="email" name="email" placeholder="Enter your Email" id="email" required="">
+        <input type="password" name="password" placeholder="Create a Password" id="password" required="">
+        <input type="password" name="confirmpassword" placeholder="Confirm your Password" id="confirmpassword" required="">
+        <button type="submit" class="btn" name="signupbtn">SIGN UP</button>
+    </form>
+    <!-- <?php include_once __DIR__ . '/../signupController.php'; ?> -->
+    <div class="signup">
+        <span class="signup">Already have an account?
+            <label for="check">LogIn</label>
+        </span>
     </div>
+</div>
+</div>
 </div>
 <div class="text2">
     <h2>Unlock a World of Possibilities!</h2>
@@ -274,61 +401,65 @@
     <p>&copy; 2023 X-print. All rights reserved.</p>
   </footer>
 </body>
-    <script>
-        function validationForm(){
-                let name=document.getElementById('name').value;
-                let surname=document.getElementById('surname').value;
-                let username=document.getElementById('username').value;
-                let email=document.getElementById('email').value;
-                let password=document.getElementById('password').value;
-                let password1=document.getElementById('confirmpassword').value;
-            }
-            let nameRegex=/^[A-Za-z]+$/;
-            if(!nameRegex.test(name)){
-                alert('Please fill a valid name');
-                return false;
-            }
-            let surnameRegex=/^[A-Za-z]+$/;
-            if(!surnameRegex.test(name)){
-                alert('Please fill a valid surname');
-                return false;
-            }
-            let usernameRegex=/^[a-zA-Z0-9_]{8,15}$/
-            if(!usernameRegex.test(username)){
-                alert('Please fill a valid username');
-                return false;
-            }
-            let emailRegex=/^[a-zA-Z._-]+@[a-zA-Z]+\.[a-z]{2,3}$/
-            if(!emailRegex.test(email)){
-                alert('Please fill a valid email');
-                return false;
-            }
-            let passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-            if(!passwordRegex.test(password)){
-                alert('Please fill a valid password');
-                return false;
-            }
-           if(password!==confirmPassword){
+<script>
+    function validationForm() {
+        let name = document.getElementById('name').value;
+        let surname = document.getElementById('surname').value;
+        let username = document.getElementById('username').value;
+        let email = document.getElementById('email').value;
+        let password = document.getElementById('password').value;
+        let confirmPassword = document.getElementById('confirmpassword').value;
+
+        let nameRegex = /^[A-Za-z]+$/;
+        if (!nameRegex.test(name)) {
+            alert('Please fill a valid name');
+            return false;
+        }
+        let surnameRegex = /^[A-Za-z]+$/;
+        if (!surnameRegex.test(surname)) {
+            alert('Please fill a valid surname');
+            return false;
+        }
+        let usernameRegex = /^[a-zA-Z0-9_]{8,15}$/;
+        if (!usernameRegex.test(username)) {
+            alert('Please fill a valid username');
+            return false;
+        }
+        let emailRegex = /^[a-zA-Z._-]+@[a-zA-Z]+\.[a-z]{2,3}$/;
+        if (!emailRegex.test(email)) {
+            alert('Please fill a valid email');
+            return false;
+        }
+        let passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        if (!passwordRegex.test(password)) {
+            alert('Please fill a valid password');
+            return false;
+        }
+        if (password !== confirmPassword) {
             alert('Passwords do not match');
             return false;
-           }
-           alert('Successfully Sign Up');
+        }
+        alert('Successfully Sign Up');
+        return true;
+    }
 
-    function validationForm1(){
-    let email1=document.getElementById('email1').value;
-    let password1=document.getElementById('password1').value;
+    function validationForm1() {
+        let email1 = document.getElementById('email1').value;
+        let password1 = document.getElementById('password1').value;
+
+        let email1Regex = /^[a-zA-z._-]+@[a-zA-Z]+\.[a-z]{2,3}$/;
+        if (!email1Regex.test(email1)) {
+            alert('Please enter a valid email');
+            return false;
+        }
+        let password1Regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+        if (!password1Regex.test(password1)) {
+            alert('Please enter a valid password');
+            return false;
+        }
+        alert('Successfully Log In');
+        return true;
     }
-    let email1Regex=/^[a-zA-z._-]+@[a-zA-Z]+\.[a-z]{2,3}$/
-    if(!email1Regex.test(email1)){
-        alert('Please enter a valid email');
-        return false;
-    }
-    let password1Regex=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/
-    if(!password1regex.test(password1)){
-        alert('Please enter a valid password');
-        return false;
-    }
-    alert('Successfully Log In');
-    </script>
+</script>
     </body>
 </html>
