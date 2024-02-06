@@ -3,7 +3,7 @@ session_start();
 $hide = "";
 
 if (!isset($_SESSION['email'])) {
-    header("location: website.php");
+    header("location: home.php");
     exit(); 
 } else {
     if ($_SESSION['role'] == "admin") {

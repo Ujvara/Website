@@ -3,7 +3,6 @@ session_start();
 
 if (isset($_POST['loginbtn'])) {
     if (empty($_POST['email']) || empty($_POST['pass'])) {
-        // Handle empty fields if needed
         echo "Please enter both email and password.";
     } else {
         $email = $_POST['email'];
@@ -16,7 +15,7 @@ if (isset($_POST['loginbtn'])) {
                 $_SESSION['email'] = $email;
                 $_SESSION['role'] = $user['role'];
                 $_SESSION['loginTime'] = date("H:i:s");
-                header("location: website.php"); // Corrected the redirection path
+                header("location: wensite.php");
                 exit();
             }
         }
@@ -193,7 +192,7 @@ class User {
     height: 220px;
 }
 .container2 .card2 .content h2{
-    font-size: 1.2rempx;
+    font-size: 1.2rem;
     font-weight: 700;
 }
 .container2 .card2 .content p{

@@ -10,7 +10,7 @@ require_once "./lib/Auth.php";
 require_once "./lib/Dashboard.php";
 
 if (!Auth::isAdmin()) {
-    header('Location: /index.php');
+    header('Location: /home.php');
     exit();
 }
 
@@ -66,25 +66,38 @@ $total_pages = ceil($total_users / $limit);
 
 
 $adminData = [
-    'name' => 'Ujvara Kuleta',
-    'email' => 'ujvara@example.com',
-    'password' => 'Ujvara1',
-    'role' => 'admin'
+    "name"=>"Ujvara",
+    "surname"=>"Kuleta",
+    "username"=>"ujvarak",
+    "email"=>"uk@ubt-uni.net",
+    "password" => "Ujvara.123",
+    "confirmpassword" => "Ujvara.123",
+    "role"=>"admin"
 ];
 
 $user1Data = [
-    'name' => 'Lend Haliti',
-    'email' => 'lend@example.com',
-    'password' => 'Lend2',
-    'role' => 'user'
+    "name"=>"Lend",
+    "surname"=>"Haliti",
+    "username"=>"lendh",
+    "email"=>"lh@ubt-uni.net",
+    "password" => "Lend.123",
+    "confirmpassword" => "Lend.123",
+    "role"=>"user"
 ];
 
 $user2Data = [
-    'name' => 'Filan Fisteku',
-    'email' => 'filan@example.com',
-    'password' => 'Filan3',
-    'role' => 'user'
+    "name"=>"Buna",
+    "surname"=>"Berisha",
+    "username"=>"bunab",
+    "email"=>"bb@ubt-uni.net",
+    "password" => "Buna.123",
+    "confirmpassword" => "Buna.123",
+    "role"=>"user"
 ];
+$userRepository = new UserRepository();
+$userRepository->insertUser($adminData);
+$userRepository->insertUser($user1Data);
+$userRepository->insertUser($user2Data);
 ?>
 
 

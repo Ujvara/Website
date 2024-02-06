@@ -22,17 +22,30 @@ class UserRepository{
         $password = $user->getPassword();
         $confirmpassword = $user->$confirmpassword;
 
-        $sql = "INSERT INTO user (id,name,surname,username,password,confirmpassword) VALUES (?,?,?,?,?,?,?)";
+        $sql = "INSERT INTO user (id, name, surname, username, email, password, confirmpassword, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $statement = $conn->prepare($sql);
-        $statement->execute([$id,$name,$surname,$username,$email,$password,$confirmpassword]);
-        echo "<script> alert('User has been inserted successfuly!'); </script>";
+        $statement->execute([$id, $name, $surname, $username, $email, $password, $confirmpassword, $role]);
+         echo "<script> alert('User has been inserted successfully!'); </script>";
 
+    }
+    function updateUser($id, $name, $surname, $username, $email, $password, $confirmpassword, $role){
+        $conn = $this->connection;
+
+        $sql = "UPDATE user SET name=?, surname=?, username=?, email=?, password=?, confirmpassword=?, role=? WHERE id=?";
+        $statement = $conn->prepare($sql);
+        $statement->execute([$name, $surname, $username, $email, $password, $confirmpassword, $role, $id]);
+
+        if ($statement->rowCount() > 0) {
+            echo "<script> alert('User has been updated successfully!'); </script>";
+        } else {
+            echo "<script> alert('Failed to update user!'); </script>";
+        }
     }
     function getAllUsers(){
         $conn = $this->connection;
         $sql = "SELECT * FROM user";
         $statement = $conn->query($sql);
-        $users = $statement->fetchAll();
+        $user = $statement->fetchAll();
         return $users;
     }
     function getUserById($id){
