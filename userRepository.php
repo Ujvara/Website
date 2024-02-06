@@ -55,5 +55,19 @@ class UserRepository{
         $user = $statement->fetch();
         return $user;
     }
+    $userRepository = new UserRepository();
+    $user = new User();
+    $user->setId(4); 
+    $user->setName('Sara');
+    $user->setSurname('Gashi');
+    $user->setUsername('sarag1');
+    $user->setEmail('sg@ubt-uni.net'); 
+    $user->setPassword('sara123'); 
+    $user->setConfirmPassword('sara123');
+    $user->setRole('user');
+
+    $userRepository->insertUser($user);
 }
+?>
+
 ?>
