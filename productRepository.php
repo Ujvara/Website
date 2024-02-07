@@ -36,16 +36,17 @@ class ProductRepository {
             echo "<script> alert('Failed to insert product!'); </script>";
         }
     }
-    <?php
+
     require_once "ProductRepository.php";
     
     $productRepository = new ProductRepository();
     
     $product_name = "New Product";
     $description = "This is a new product description.";
-    $image_url = "path/to/image.jpg"; // Example image URL
+    $image_url = "path/to/image.jpg";
     
     $productRepository->insertProduct($product_name, $description, $image_url);
-    ?>
 }
+    ?>
+
 ?>
