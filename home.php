@@ -301,7 +301,7 @@ header{
         <div class="navbar2">
             <div class="homenav1">
                 <ul>
-                    <li><a class="n" href="website.html"><b>Main</b></a></li>
+                    <li><a class="n" href="wensite.php"><b>Main</b></a></li>
                     <li><a class="n" href="AboutUs.php"><b>About Us</b></a></li>
                     <li><a class="n" href="Workspace.php"><b>Workspace</b></a></li>
                     <li><a class="n" href="ContactUs.php"><b>Contact Us</b></a></li>

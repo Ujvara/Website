@@ -22,11 +22,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         switch ($action) {
             case 'deleteUser':
-                $userId = $_POST['userId'];
-                $userRepository->deleteUser($userId);
+                $id = $_POST['id'];
+                $userRepository->deleteUser($id);
                 break;
             case 'updateUser':
-                $Id = $_POST['Id'];
+                $id = $_POST['id'];
                 $name = $_POST['name'];
                 $surname = $_POST['surname'];
                 $username = $_POST['username'];
@@ -34,18 +34,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $password = $_POST['password'];
                 $confirmpassword = $_POST['confirmpassword'];
                 $role = $_POST['role'];
-                $userRepository->updateUser($userId, $name, $surname, $username, $email, $password, $confirmpassword, $role);
+                $userRepository->updateUser($id, $name, $surname, $username, $email, $password, $confirmpassword, $role);
                 break;
             case 'deleteProduct':
-                $id = $_POST['productId'];
-                $productRepository->deleteProduct($productId);
+                $id = $_POST['id'];
+                $productRepository->deleteProduct($id);
                 break;
             case 'updateProduct':
-                $productId = $_POST['productId'];
+                $id = $_POST['id'];
                 $product_name = $_POST['product_name'];
                 $description = $_POST['description'];
                 $image_url = $_POST['image_url'];
-                $productRepository->updateProduct($productId, $product_name, $description, $image_url);
+                $productRepository->updateProduct($id, $product_name, $description, $image_url);
                 break;
         }
     }

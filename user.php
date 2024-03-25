@@ -1,25 +1,21 @@
 <?php
 class User {
-    private $id;
     private $name;
     private $surname;
     private $username;
     private $email;
     private $password;
     private $confirmpassword;
+    private $role;
 
-    function __construct($id, $name, $surname, $username, $email, $password, $confirmpassword) {
-        $this->id = $id;
+    function __construct($name, $surname, $username, $email, $password, $confirmpassword, $role = 'user') {
         $this->name = $name;
         $this->surname = $surname;
         $this->username = $username;
         $this->email = $email;
         $this->password = $password;
         $this->confirmpassword = $confirmpassword;
-    }
-
-    function getId() {
-        return $this->id;
+        $this->role = $role;
     }
 
     function getName() {
@@ -44,6 +40,10 @@ class User {
 
     function getConfirmPassword() {
         return $this->confirmpassword;
+    }
+    
+    function getRole() {
+        return $this->role;
     }
 }
 ?>

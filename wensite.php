@@ -1,17 +1,7 @@
 <?php
 session_start();
-$hide = "";
 
-if (!isset($_SESSION['email'])) {
-    header("location: home.php");
-    exit(); 
-} else {
-    if ($_SESSION['role'] == "admin") {
-        $hide = "";
-    } else {
-        $hide = "hide";
-    }
-}
+$is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,6 +21,9 @@ if (!isset($_SESSION['email'])) {
     <li><a href="AboutUs.php">About Us</a></li>
     <li><a href="Workspace.php">Workspace</a></li>
     <li><a href="ContactUs.php">Contact Us</a></li>
+    <?php if ($is_admin): ?>
+            <li><a href="dashb.php">Dashboard</a></li>
+        <?php endif; ?>
 </ul>
 </div>
 <div class="text">
@@ -38,8 +31,6 @@ if (!isset($_SESSION['email'])) {
 <h3>Printing is an art form and our work is a reflection of our passion.</h3>
 <p><i>We use <span class="span3">creativity</span> to create unique business <span class="span1">solutions</span> that connect our clients with their <span class="span2">audience</span></i></p>
 
-<h3><?php echo "Email: ".$_SESSION['email']."<br>" ?></h3>
-    <h3><?php echo "Login Time: ".$_SESSION['loginTime']."<br>"?></h3>
 </div>
 </div>
 </body>
